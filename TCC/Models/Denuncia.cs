@@ -16,12 +16,14 @@ namespace TCC.Models
         [Required]
         [Column(TypeName = "VARCHAR(500)")]
         public string Descricao { get; set; }
-        public byte[] Foto { get; set; }
+        public string Foto { get; set; }
         [Required]
         [Column(TypeName = "VARCHAR(100)")]
         public string Status { get; set; }
+        [Required]
+        [Column(TypeName = "DATE")]
+        public DateTime DataRealizada { get; set; }
 
-        public IList<IFormFile> Arquivos { get; set; }
 
         public DenunciaEndereco DenunciaEndereco { get; set; }
     }

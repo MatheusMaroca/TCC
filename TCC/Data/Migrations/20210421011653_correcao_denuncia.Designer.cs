@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TCC.Data;
 
 namespace TCC.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210421011653_correcao_denuncia")]
+    partial class correcao_denuncia
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -286,8 +288,8 @@ namespace TCC.Data.Migrations
                     b.Property<string>("Descicao")
                         .HasColumnType("VARCHAR(500)");
 
-                    b.Property<string>("Foto")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("Foto")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Nome")
                         .HasColumnType("VARCHAR(100)");
@@ -330,8 +332,7 @@ namespace TCC.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClinicaId")
-                        .IsUnique();
+                    b.HasIndex("ClinicaId");
 
                     b.ToTable("ClinicaEndereco");
                 });
@@ -342,9 +343,6 @@ namespace TCC.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DataRealizada")
-                        .HasColumnType("DATE");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -592,8 +590,8 @@ namespace TCC.Data.Migrations
             modelBuilder.Entity("TCC.Models.ClinicaEndereco", b =>
                 {
                     b.HasOne("TCC.Models.Clinica", "Clinica")
-                        .WithOne("ClinicaEndereco")
-                        .HasForeignKey("TCC.Models.ClinicaEndereco", "ClinicaId")
+                        .WithMany()
+                        .HasForeignKey("ClinicaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -1,0 +1,82 @@
+﻿@model TCC.Models.Denuncia
+
+@{
+    ViewData["Title"] = "Cadastro";
+}
+
+<h1>Cadastro de Agendamento</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form enctype="multipart/form-data" asp-action="Cadastrar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label"></label>
+                <input asp-for="Descricao" class="form-control" />
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Foto</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="imagem" id="customFile">
+                    <label class="custom-file-label" for="customFile">Escolha a imagem</label>
+                </div>                
+            </div>
+            <div class="form-group">
+                <label asp-for="DenunciaEndereco.CidadeDistrito"></label>
+                <select asp-for="DenunciaEndereco.CidadeDistrito" class="form-control">
+                    <option value="Londrina">Londrina</option>
+                    <option value="Warta">Warta</option>
+                    <option value="São Luís">São Luís</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DenunciaEndereco.Regiao"></label>
+                <select asp-for="DenunciaEndereco.Regiao" class="form-control">
+                    <option value="Norte">Norte</option>
+                    <option value="Sul">Sul</option>
+                    <option value="Centro">Centro</option>
+                    <option value="Leste">Leste</option>
+                    <option value="Oeste">Oeste</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DenunciaEndereco.Rua"></label>
+                <input asp-for="DenunciaEndereco.Rua" class="form-control" />
+                <span asp-validation-for="DenunciaEndereco.Rua" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DenunciaEndereco.Bairro"></label>
+                <input asp-for="DenunciaEndereco.Bairro" class="form-control" />
+                <span asp-validation-for="DenunciaEndereco.Bairro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DenunciaEndereco.Numero"></label>
+                <input asp-for="DenunciaEndereco.Numero" class="form-control" />
+                <span asp-validation-for="DenunciaEndereco.Numero" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}

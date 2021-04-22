@@ -1,0 +1,97 @@
+﻿@model TCC.Models.Clinica
+
+@{
+    ViewData["Title"] = "Cadastrar";
+}
+
+<h1>Cadastrar</h1>
+
+<h4>Clinica</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Cadastrar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefone" class="control-label"></label>
+                <input asp-for="Telefone" class="form-control" />
+                <span asp-validation-for="Telefone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Foto" class="control-label"></label>
+                <input asp-for="Foto" class="form-control" />
+                <span asp-validation-for="Foto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descicao" class="control-label"></label>
+                <input asp-for="Descicao" class="form-control" />
+                <span asp-validation-for="Descicao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Foto</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="imagem" id="customFile">
+                    <label class="custom-file-label" for="customFile">Escolha a imagem</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClinicaEndereco.CidadeDistrito"></label>
+                <select asp-for="ClinicaEndereco.CidadeDistrito" class="form-control">
+                    <option value="Londrina">Londrina</option>
+                    <option value="Warta">Warta</option>
+                    <option value="São Luís">São Luís</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClinicaEndereco.Regiao"></label>
+                <select asp-for="ClinicaEndereco.Regiao" class="form-control">
+                    <option value="Norte">Norte</option>
+                    <option value="Sul">Sul</option>
+                    <option value="Centro">Centro</option>
+                    <option value="Leste">Leste</option>
+                    <option value="Oeste">Oeste</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClinicaEndereco.Rua"></label>
+                <input asp-for="ClinicaEndereco.Rua" class="form-control" />
+                <span asp-validation-for="ClinicaEndereco.Rua" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClinicaEndereco.Bairro"></label>
+                <input asp-for="ClinicaEndereco.Bairro" class="form-control" />
+                <span asp-validation-for="ClinicaEndereco.Bairro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClinicaEndereco.Numero"></label>
+                <input asp-for="ClinicaEndereco.Numero" class="form-control" />
+                <span asp-validation-for="ClinicaEndereco.Numero" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}
