@@ -14,7 +14,7 @@ namespace TCC.Controllers
         public AgendaCastramovelController(ApplicationDbContext context)
         {
             _context = context;
-        }s
+        }
         public IActionResult CadastrarEmMassa()
         {
             return View();
