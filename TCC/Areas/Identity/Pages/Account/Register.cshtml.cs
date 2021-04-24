@@ -64,18 +64,18 @@ namespace TCC.Areas.Identity.Pages.Account
             [Required]
             [EmailAddress]
             [Display(Name = "Confirm Email")]
-            [Compare("Email", ErrorMessage = "The email and confirmation email do not match.")]
+            [Compare("Email", ErrorMessage = "Os emails não conferem.")]
             public string ConfirmEmail { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "A {0} tem que ter no mínimo {2} caracteres", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Senha")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "As senha não conferem.")]
             public string ConfirmPassword { get; set; }
 
             [Required]
@@ -84,7 +84,7 @@ namespace TCC.Areas.Identity.Pages.Account
 
             [Required]
             [Display(Name = "Rg")]
-            [StringLength(9, MinimumLength = 9, ErrorMessage = "O rg deve conter 9 caracteres")]
+            [StringLength(9, MinimumLength = 9, ErrorMessage = "O RG deve conter 9 caracteres")] 
             public string Rg { get; set; }
 
             public string CidadeDistrito { get; set; }
