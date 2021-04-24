@@ -6,46 +6,47 @@
 
 <h1>Cadastro de Agendamento</h1>
 
+<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Cadastrar">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Animal.Nome" class="control-label">Nome</label>
+                <label asp-for="Animal.Nome" class="control-label"></label>
                 <input asp-for="Animal.Nome" class="form-control" />
                 <span asp-validation-for="Animal.Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Animal.Tipo" class="control-label">Tipo</label>
+                <label asp-for="Animal.Tipo" class="control-label"></label>
                 <select asp-for="Animal.Tipo" class="form-control">
                     <option value="C">Cachorro</option>
                     <option value="G">Gato</option>
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="Animal.Cor" class="control-label">Cor</label>
+                <label asp-for="Animal.Cor" class="control-label"></label>
                 <input asp-for="Animal.Cor" class="form-control" />
                 <span asp-validation-for="Animal.Cor" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Animal.IdadeAno" class="control-label">Idade ano</label>
+                <label asp-for="Animal.IdadeAno" class="control-label"></label>
                 <input asp-for="Animal.IdadeAno" class="form-control" />
                 <span asp-validation-for="Animal.IdadeAno" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Animal.IdadeMes" class="control-label">Idade mês</label>
+                <label asp-for="Animal.IdadeMes" class="control-label"></label>
                 <input asp-for="Animal.IdadeMes" class="form-control" />
                 <span asp-validation-for="Animal.IdadeMes" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Animal.Sexo" class="control-label">Sexo</label>
+                <label asp-for="Animal.Sexo" class="control-label"></label>
                 <select asp-for="Animal.Sexo" class="form-control">
                     <option value="M">Macho</option>
                     <option value="F">Fêmea</option>
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="Animal.Porte" class="control-label">Porte</label>
+                <label asp-for="Animal.Porte" class="control-label"></label>
                 <select asp-for="Animal.Porte" class="form-control">
                     <option value="P">Pequeno</option>
                     <option value="M">Médio</option>
@@ -53,24 +54,22 @@
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="Animal.DataVacida" class="control-label">Data da última vacina</label>
+                <label asp-for="Animal.DataVacida" class="control-label"></label>
                 <input asp-for="Animal.DataVacida" class="form-control" type="date"/>
                 <span asp-validation-for="Animal.DataVacida" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Animal.DataVermifugo" class="control-label"> Data vermífugo</label>
+                <label asp-for="Animal.DataVermifugo" class="control-label"></label>
                 <input asp-for="Animal.DataVermifugo" class="form-control" type="date"/>
                 <span asp-validation-for="Animal.DataVermifugo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Animal.Medicamento" class="control-label">
-                    Faz uso de medicação ou fez uso recentemente? Se sim, digite o nome do medicamento.
-                </label>
+                <label asp-for="Animal.Medicamento" class="control-label"></label>
                 <input asp-for="Animal.Medicamento" class="form-control" />
                 <span asp-validation-for="Animal.Medicamento" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
