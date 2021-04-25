@@ -1,0 +1,61 @@
+﻿@model TCC.Models.Denuncia
+
+@{
+    ViewData["Title"] = "EditarStatus";
+}
+
+<h1>EditarStatus</h1>
+
+<h4>Denuncia</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditarStatus">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label"></label>
+                <label>@Model.Descricao</label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Foto" class="control-label"></label>
+                @if (@Model.Foto != null || @Model.Foto == "")
+                {
+                    <img src="~/Imagens/Denuncias/@Model.Foto" class="rounded-circle" height="40" width="40" asp-append-version="true" />
+                }
+                else
+                {
+                    <img src="~/Imagens/Denuncias/default.png" class="rounded-circle" height="40" width="40" asp-append-version="true" />
+                }
+            </div>
+
+            <div class="form-control">
+                <label class="control-label">Endereço:</label>
+                <label>@Model.DenunciaEndereco.CidadeDistrito -  @Model.DenunciaEndereco.Rua,@Model.DenunciaEndereco.Numero </label>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <select asp-for="Status" class="form-control">
+                    <option value="Averiguado">Averiguado</option>                    
+                    <option value="Pendente">Pendente</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataRealizada" class="control-label"></label>
+                <label>@Model.DataRealizada.ToString("dd/MM/yyyy")</label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
