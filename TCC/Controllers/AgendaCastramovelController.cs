@@ -35,5 +35,23 @@ namespace TCC.Controllers
 
             return View();
         }
+
+        [HttpPatch]
+        public IActionResult Editar(int id, AgendaCastramovel model)
+        {
+            AgendaCastramovel agenda = _context.AgendasCastramovel.Find(id);
+
+            agenda.Data = model.Data;
+            agenda.Bairro = model.Bairro;
+            agenda.CidadeDistrito = model.CidadeDistrito;
+            agenda.Numero = model.Numero;
+            agenda.Regiao = model.Regiao;
+            agenda.Rua = model.Rua;
+
+            _context.AgendasCastramovel.Update(agenda);
+
+            return View();
+        }
+
     }
 }
