@@ -22,7 +22,7 @@ namespace TCC.Areas.Identity.Pages.Account
         private readonly SignInManager<Usuario> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<Usuario> signInManager, 
+        public LoginModel(SignInManager<Usuario> signInManager,
             ILogger<LoginModel> logger,
             UserManager<Usuario> userManager)
         {
@@ -51,7 +51,7 @@ namespace TCC.Areas.Identity.Pages.Account
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
-            [Display(Name = "Remember me?")]
+            [Display(Name = "Lembrar-me")]
             public bool RememberMe { get; set; }
         }
 
