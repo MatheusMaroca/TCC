@@ -38,6 +38,27 @@ namespace TCC.Controllers
         }
 
 
+        public IActionResult Cadastro()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Cadastro(AgendaCastramovel model)
+        {
+            if(model == null)
+            {
+                return NotFound();
+            }
+            model.Id = 0;
+
+            _context.AgendasCastramovel.Add(model);
+            _context.SaveChanges();
+
+            return View();
+        }
+
+
         public IActionResult Editar(int? id)
         {
             if (id == null)
