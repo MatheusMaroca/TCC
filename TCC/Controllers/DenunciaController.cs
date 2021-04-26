@@ -25,7 +25,7 @@ namespace TCC.Controllers
 
         public IActionResult Index()
         {
-            return View(_context.Denuncias.ToList());
+            return View(_context.Denuncias.Include(c => c.DenunciaEndereco).ToList());
         }
 
         public IActionResult EditarStatus(int? id)

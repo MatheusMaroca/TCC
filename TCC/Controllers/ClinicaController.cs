@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,6 +22,72 @@ namespace TCC.Controllers
             _context = context;
             _webHostEnvironment = webHostEnvironment;
         }
+
+        public IActionResult Index()
+        {
+            return View(_context.Clinicas.ToList());
+        }
+        
+        public IActionResult Editar(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var clinica = _context.Clinicas.Include(c => c.ClinicaEndereco).First(c => c.Id == id);
+            if (clinica == null)
+            {
+                return NotFound();
+            }
+
+
+            return View(clinica);
+        }
+
+        [HttpPost]
+        public IActionResult Editar(int id, Clinica model)
+        {
+            if (id != model.Id)
+            {
+                return NotFound();
+            }
+            try
+            {                
+                _context.Update(model);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ClinicaExists(model.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Detalhes(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var clinica = _context.Clinicas.Include(c => c.ClinicaEndereco).First(c => c.Id == id);
+            if (clinica == null)
+            {
+                return NotFound();
+            }
+
+
+            return View(clinica);
+        }
+
         public IActionResult Cadastrar()
         {
             return View();
@@ -35,7 +102,7 @@ namespace TCC.Controllers
                 Clinica clinica = new Clinica
                 {
                     ClinicaEndereco = model.ClinicaEndereco,
-                    Descicao = model.Descicao,
+                    Descricao = model.Descricao,
                     Foto = nomeUnicoArquivo,
                     Nome = model.Nome,
                     Telefone = model.Telefone
@@ -49,6 +116,32 @@ namespace TCC.Controllers
             {
                 return View();
             }
+        }
+
+        public IActionResult Deletar(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var clinica = _context.Clinicas.Include(c => c.ClinicaEndereco).FirstOrDefault(m => m.Id == id);
+            if (clinica == null)
+            {
+                return NotFound();
+            }
+
+            return View(clinica);
+        }
+        
+        [HttpPost, ActionName("Deletar")]
+        [ValidateAntiForgeryToken]
+        public IActionResult CorfirmarDelecao(int id)
+        {
+            var clinica = _context.Clinicas.Find(id);
+            _context.Clinicas.Remove(clinica);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
 
 
@@ -66,6 +159,11 @@ namespace TCC.Controllers
                 }
             }
             return nomeUnicoArquivo;
+        }
+
+        private bool ClinicaExists(int id)
+        {
+            return _context.Clinicas.Any(e => e.Id == id);
         }
     }
 }
