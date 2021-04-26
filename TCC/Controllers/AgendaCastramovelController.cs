@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,21 +37,60 @@ namespace TCC.Controllers
             return View();
         }
 
-        [HttpPatch]
+
+        public IActionResult Editar(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            AgendaCastramovel agenda = _context.AgendasCastramovel.Include(a => a.Data).First(a => a.Id == id);
+            if (agenda == null)
+            {
+                return NotFound();
+            }
+
+            return View(agenda);
+
+        }
+
+        [HttpPost]
         public IActionResult Editar(int id, AgendaCastramovel model)
         {
-            AgendaCastramovel agenda = _context.AgendasCastramovel.Find(id);
+            if (id != model.Id)
+            {
+                return NotFound();
+            }
+            try
+            {
+                AgendaCastramovel agenda = _context.AgendasCastramovel.Find(id);
 
-            agenda.Data = model.Data;
-            agenda.Bairro = model.Bairro;
-            agenda.CidadeDistrito = model.CidadeDistrito;
-            agenda.Numero = model.Numero;
-            agenda.Regiao = model.Regiao;
-            agenda.Rua = model.Rua;
 
-            _context.AgendasCastramovel.Update(agenda);
+                agenda = model;
+                
+                _context.AgendasCastramovel.Update(agenda);
 
-            return View();
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!AgendaCastramovelExists(model.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+                return RedirectToAction(nameof(Index));
+        }
+
+        private bool AgendaCastramovelExists(int id)
+        {
+            return _context.AgendasCastramovel.Any(e => e.Id == id);
         }
 
     }
