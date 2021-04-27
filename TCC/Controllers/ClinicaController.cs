@@ -25,7 +25,7 @@ namespace TCC.Controllers
 
         public IActionResult Index()
         {
-            return View(_context.Clinicas.ToList());
+            return View(_context.Clinicas.Include(c => c.ClinicaEndereco).ToList());
         }
         
         public IActionResult Editar(int? id)
