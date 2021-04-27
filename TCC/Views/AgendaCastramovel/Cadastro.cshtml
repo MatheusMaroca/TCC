@@ -1,0 +1,57 @@
+﻿@model TCC.Models.AgendaCastramovel
+
+@{
+    ViewData["Title"] = "Cadastro";
+}
+
+<h1>Cadastro</h1>
+
+<h4>AgendaCastramovel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Cadastro">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label>Data</label>
+                <input class="form-control" type="date" name="data" />
+            </div>
+            <div class="form-group">
+                <label asp-for="CidadeDistrito" class="control-label"></label>
+                <input asp-for="CidadeDistrito" class="form-control" />
+                <span asp-validation-for="CidadeDistrito" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Regiao" class="control-label"></label>
+                <input asp-for="Regiao" class="form-control" />
+                <span asp-validation-for="Regiao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rua" class="control-label"></label>
+                <input asp-for="Rua" class="form-control" />
+                <span asp-validation-for="Rua" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Numero" class="control-label"></label>
+                <input asp-for="Numero" class="form-control" />
+                <span asp-validation-for="Numero" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bairro" class="control-label"></label>
+                <input asp-for="Bairro" class="form-control" />
+                <span asp-validation-for="Bairro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
