@@ -6,9 +6,8 @@
 
 <h1>Lista de Clínicas</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
+<a href="#" class="btn btn-default btnCadastrar">Cadastrar</a>
 <table class="table">
     <thead>
         <tr>
@@ -31,39 +30,89 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefone)
-            </td>
-            @if (item.Foto == null || item.Foto == "")
-            {
+        @foreach (var item in Model)
+        {
+            <tr>
                 <td>
-                    Não possui foto
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefone)
+                </td>
+                @if (item.Foto == null || item.Foto == "")
+                {
+                    <td>
+                        Não possui foto
 
-                </td>
-            }
-            else
-            {
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        Possui foto
+                    </td>
+                }
                 <td>
-                    Possui foto
+                    @Html.DisplayFor(modelItem => item.Descricao)
                 </td>
-            }
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                @item.ClinicaEndereco.CidadeDistrito - @item.ClinicaEndereco.Rua, @item.ClinicaEndereco.Numero
-            </td>
-            <td>
-                <a asp-action="Editar" asp-route-id="@item.Id">Editar</a> |
-                <a asp-action="Detalhes" asp-route-id="@item.Id">Detalhes</a> |
-                <a asp-action="Deletar" asp-route-id="@item.Id">Deletar</a>
-            </td>
-        </tr>
-}
+                <td>
+                    @item.ClinicaEndereco.CidadeDistrito - @item.ClinicaEndereco.Rua, @item.ClinicaEndereco.Numero
+                </td>
+                <td>
+                    <a href="#" class="btn btn-default btnEditar" data-value="@item.Id">Editar</a> ||
+                    <a href="#" class="btn btn-default btnDetalhes" data-value="@item.Id">Details</a> ||
+                    <a href="#" class="btn btn-default btnExcluir" data-value="@item.Id">Excluir</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="teste"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $.ajaxSetup({ cache: false });
+            $(".btnDetalhes").click(function () {
+
+                var id = $(this).data("value");
+                $("#teste").load("/Clinica/Detalhes/" + id, function () {
+                    $('#myModal').modal("show");
+                });
+            });
+            $(".btnEditar").click(function () {
+
+                var id = $(this).data("value");
+                $("#teste").load("/Clinica/Editar/" + id, function () {
+                    $('#myModal').modal("show");
+                });
+            });
+            $(".btnExcluir").click(function () {
+
+                var id = $(this).data("value");
+                $("#teste").load("/Clinica/Deletar/" + id, function () {
+                    $('#myModal').modal("show");
+                });
+            });
+            $(".btnCadastrar").click(function () {
+
+                var id = $(this).data("value");
+                $("#teste").load("/Clinica/Cadastrar/" + id, function () {
+                    $('#myModal').modal("show");
+                });
+            });
+        });
+    </script>
+
+}

@@ -1,6 +1,7 @@
 ﻿@model TCC.Models.Clinica
 
-@{
+@{  
+    Layout = null;
     ViewData["Title"] = "Cadastrar clínica";
 }
 
@@ -75,11 +76,8 @@
             </div>
         </form>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Voltar para a lista</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

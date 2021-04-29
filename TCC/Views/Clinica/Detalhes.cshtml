@@ -1,13 +1,12 @@
 ﻿@model TCC.Models.Clinica
 
 @{
-    ViewData["Title"] = "Detalhes";
+    Layout = null;
+    ViewBag.Title = "Detalhes";
 }
 
-<h1>Detalhes</h1>
-
 <div>
-    <h4>Clinica</h4>
+    <h4>Detalhes</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -41,8 +40,4 @@
             @Model.ClinicaEndereco.CidadeDistrito - @Model.ClinicaEndereco.Rua, @Model.ClinicaEndereco.Numero
         </dd>
     </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
 </div>
