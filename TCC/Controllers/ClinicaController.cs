@@ -110,7 +110,7 @@ namespace TCC.Controllers
 
                 _context.Clinicas.Add(clinica);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Clinica");
             }
             catch (Exception ex)
             {
