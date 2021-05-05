@@ -28,6 +28,8 @@ namespace TCC.Data
             base.OnModelCreating(builder);
             builder.Entity<Usuario>().HasIndex(u => u.Cpf).IsUnique();
             builder.Entity<Usuario>().HasIndex(u => u.Rg).IsUnique();
+            builder.Entity<Usuario>().HasIndex(u => u.UserName).IsUnique(false);
+            builder.Entity<Usuario>().HasIndex(u => u.NormalizedUserName).IsUnique(false);
 
         }
     }

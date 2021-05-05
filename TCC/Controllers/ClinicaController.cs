@@ -27,7 +27,7 @@ namespace TCC.Controllers
         {
             return View(_context.Clinicas.Include(c => c.ClinicaEndereco).ToList());
         }
-        
+
         public IActionResult Editar(int? id)
         {
             if (id == null)
@@ -53,8 +53,9 @@ namespace TCC.Controllers
                 return NotFound();
             }
             try
-            {                
+            {
                 _context.Update(model);
+
                 _context.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
@@ -133,10 +134,10 @@ namespace TCC.Controllers
 
             return View(clinica);
         }
-        
-        [HttpPost, ActionName("Deletar")]
+
+        [HttpPost, ActionName("ConfirmarDelecao")]
         [ValidateAntiForgeryToken]
-        public IActionResult CorfirmarDelecao(int id)
+        public IActionResult ConfirmarDelecao(int id)
         {
             var clinica = _context.Clinicas.Find(id);
             _context.Clinicas.Remove(clinica);

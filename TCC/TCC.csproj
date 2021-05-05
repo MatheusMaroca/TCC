@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20210504204043_Correcao usuario.cs" />
+    <Compile Remove="Data\Migrations\20210504204043_Correcao usuario.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\Imagens\Denuncias\20099cfc-703f-4be6-bdf1-97fa4bc78968_Screenshot_2.jpg" />
   </ItemGroup>
 

@@ -57,6 +57,10 @@ namespace TCC.Areas.Identity.Pages.Account
             public string Name { get; set; }
 
             [Required]
+            [Phone]
+            public string Phone { get; set; }
+
+            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -120,7 +124,7 @@ namespace TCC.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new Usuario { UserName = Input.Name, Email = Input.Email, Cpf = Input.Cpf, Rg = Input.Rg };
+                var user = new Usuario { UserName = Input.Email, Email = Input.Email, Cpf = Input.Cpf, Rg = Input.Rg, NomeCompleto = Input.Name, PhoneNumber = Input.Phone, EmailConfirmed = true };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 UsuarioEndereco userEnd = new UsuarioEndereco { UsuarioId = user.Id, Bairro = Input.Bairro, CidadeDistrito = Input.CidadeDistrito, Numero = Convert.ToInt32(Input.Numero), Regiao = Input.Regiao, Rua = Input.Rua };
                 _context.UsuariosEnderecos.Add(userEnd);

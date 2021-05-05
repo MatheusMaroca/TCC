@@ -16,5 +16,9 @@ namespace TCC.Models
         [Required]
         [Column(TypeName = "VARCHAR(9)")]        
         public string Rg { get; set; }
+
+        [Required]
+        [Column(TypeName = "VARCHAR(100)")]
+        public string NomeCompleto { get; set; }
     }
 }
