@@ -1,14 +1,13 @@
 ﻿@model TCC.Models.Denuncia
 
 @{
+    Layout = null;
     ViewData["Title"] = "Detalhes";
 }
 
 <h1>Detalhes</h1>
 
 <div>
-    <h4>Denuncia</h4>
-    <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Descricao)
@@ -49,7 +48,4 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="EditarStatus" asp-route-id="@Model.Id">Editar Status</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+

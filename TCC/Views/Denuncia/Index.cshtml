@@ -6,14 +6,11 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Descricao)
+                Descrição
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Foto)
@@ -22,7 +19,7 @@
                 @Html.DisplayNameFor(model => model.Status)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DataRealizada)
+                Data Realizada
             </th>
             <th>
                 Endereço
@@ -33,38 +30,74 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            @if (item.Foto == null || item.Foto == "")
-            {
+            <tr>
                 <td>
-                    Não possui foto
-
+                    @Html.DisplayFor(modelItem => item.Descricao)
                 </td>
-            }
-            else
-            {
+                @if (item.Foto == null || item.Foto == "")
+                {
+                    <td>
+                        Não possui foto
+
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        Possui foto
+                    </td>
+                }
+
                 <td>
-                    Possui foto
+                    @Html.DisplayFor(modelItem => item.Status)
                 </td>
-            }
-
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @item.DataRealizada.ToString("dd/MM/yyyy")
-            </td>
-            <td>
-                @item.DenunciaEndereco.CidadeDistrito - @item.DenunciaEndereco.Rua, @item.DenunciaEndereco.Numero
-            </td>
-            <td>
-                <a asp-action="EditarStatus" asp-route-id="@item.Id">EditarStatus</a> |
-                <a asp-action="Detalhes" asp-route-id="@item.Id">Detalhes</a>
-            </td>
-        </tr>
+                <td>
+                    @item.DataRealizada.ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @item.DenunciaEndereco.CidadeDistrito - @item.DenunciaEndereco.Rua, @item.DenunciaEndereco.Numero
+                </td>
+                <td>
+                    <a href="#" class="btn btn-default btnEditar" data-value="@item.Id">Editar</a> ||
+                    <a href="#" class="btn btn-default btnDetalhes" data-value="@item.Id">Detalhes</a> ||
+                    <a href="#" class="btn btn-default btnExcluir" data-value="@item.Id">Excluir</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="teste"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $.ajaxSetup({ cache: false });
+            $(".btnDetalhes").click(function () {
+
+                var id = $(this).data("value");
+                $("#teste").load("/Denuncia/Detalhes/" + id, function () {
+                    $('#myModal').modal("show");
+                });
+            });
+            $(".btnEditar").click(function () {
+
+                var id = $(this).data("value");
+                $("#teste").load("/Denuncia/EditarStatus/" + id, function () {
+                    $('#myModal').modal("show");
+                });
+            });
+        });
+    </script>
+
+}

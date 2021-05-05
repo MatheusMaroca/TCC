@@ -4,15 +4,14 @@
     ViewData["Title"] = "Cadastro Denúncia";
 }
 
-<h1>Cadastro de Agendamento</h1>
-
-<hr />
+<h1>Cadastre sua denúncia! </h1>
+</br>
 <div class="row">
     <div class="col-md-4">
         <form enctype="multipart/form-data" asp-action="Cadastrar">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Descricao" class="control-label"></label>
+                <label asp-for="Descricao" class="control-label">Descrição</label>
                 <input asp-for="Descricao" class="form-control" />
                 <span asp-validation-for="Descricao" class="text-danger"></span>
             </div>
@@ -24,7 +23,7 @@
                 </div>                
             </div>
             <div class="form-group">
-                <label asp-for="DenunciaEndereco.CidadeDistrito"></label>
+                <label asp-for="DenunciaEndereco.CidadeDistrito">Cidade/Distrito</label>
                 <select asp-for="DenunciaEndereco.CidadeDistrito" class="form-control">
                     <option value="Londrina">Londrina</option>
                     <option value="Warta">Warta</option>
@@ -32,7 +31,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="DenunciaEndereco.Regiao"></label>
+                <label asp-for="DenunciaEndereco.Regiao">Região</label>
                 <select asp-for="DenunciaEndereco.Regiao" class="form-control">
                     <option value="Norte">Norte</option>
                     <option value="Sul">Sul</option>
@@ -42,31 +41,28 @@
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="DenunciaEndereco.Rua"></label>
+                <label asp-for="DenunciaEndereco.Rua">Rua</label>
                 <input asp-for="DenunciaEndereco.Rua" class="form-control" />
                 <span asp-validation-for="DenunciaEndereco.Rua" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DenunciaEndereco.Bairro"></label>
+                <label asp-for="DenunciaEndereco.Bairro">Bairro</label>
                 <input asp-for="DenunciaEndereco.Bairro" class="form-control" />
                 <span asp-validation-for="DenunciaEndereco.Bairro" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DenunciaEndereco.Numero"></label>
+                <label asp-for="DenunciaEndereco.Numero">Número</label>
                 <input asp-for="DenunciaEndereco.Numero" class="form-control" />
                 <span asp-validation-for="DenunciaEndereco.Numero" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

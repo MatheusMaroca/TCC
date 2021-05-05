@@ -15,6 +15,7 @@ namespace TCC.Models
         public int Id { get; set; }
         [Required]
         [Column(TypeName = "VARCHAR(500)")]
+        [Display(Name = "Descrição")] 
         public string Descricao { get; set; }
         public string Foto { get; set; }
         [Required]
@@ -22,6 +23,7 @@ namespace TCC.Models
         public string Status { get; set; }
         [Required]
         [Column(TypeName = "DATE")]
+        [Display(Name = "Data Realizada")]
         public DateTime DataRealizada { get; set; }
 
 

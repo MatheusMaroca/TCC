@@ -18,6 +18,7 @@ namespace TCC.Models
         public string Telefone { get; set; }
         public string Foto { get; set; }
         [Column(TypeName = "VARCHAR(500)")]
+        [Display(Name = "Descrição")] 
         public string Descricao { get; set; }        
 
         public ClinicaEndereco ClinicaEndereco { get; set; }
