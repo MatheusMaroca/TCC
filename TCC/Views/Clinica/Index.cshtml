@@ -9,7 +9,7 @@
 
 <a href="#" class="btn btn-default btnCadastrar">Cadastrar</a>
 <div class="table-responsive">
-    <table class="table table-bordered">
+    <table id="tablecliente" class="table table-bordered">
         <thead>
             <tr>
                 <th>
@@ -115,6 +115,14 @@
                     $('#myModal').modal("show");
                 });
             });
+        });
+
+        $('#tablecliente').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+
         });
     </script>
 
