@@ -1633,8 +1633,17 @@ pre {
 .table {
     width: 100%;
     margin-bottom: 1rem;
+    background-color: azure;
     color: #212529
 }
+
+    .table thead {
+        background-color: red
+    }
+
+    .table tbody {
+        background-color: greenyellow
+    }
 
     .table td, .table th {
         padding: .75rem;

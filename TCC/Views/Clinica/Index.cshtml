@@ -8,66 +8,69 @@
 
 
 <a href="#" class="btn btn-default btnCadastrar">Cadastrar</a>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telefone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Foto)
-            </th>
-            <th>
-                Descrição
-            </th>
-            <th>
-                Endereço
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Telefone)
-                </td>
-                @if (item.Foto == null || item.Foto == "")
-                {
-                    <td>
-                        Não possui foto
-
-                    </td>
-                }
-                else
-                {
-                    <td>
-                        Possui foto
-                    </td>
-                }
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descricao)
-                </td>
-                <td>
-                    @item.ClinicaEndereco.CidadeDistrito - @item.ClinicaEndereco.Rua, @item.ClinicaEndereco.Numero
-                </td>
-                <td>
-                    <a href="#" class="btn btn-default btnEditar" data-value="@item.Id">Editar</a> ||
-                    <a href="#" class="btn btn-default btnDetalhes" data-value="@item.Id">Detalhes</a> ||
-                    <a href="#" class="btn btn-default btnExcluir" data-value="@item.Id">Excluir</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Telefone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Foto)
+                </th>
+                <th>
+                    Descrição
+                </th>
+                <th>
+                    Endereço
+                </th>
+                <th>Ação</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telefone)
+                    </td>
+                    @if (item.Foto == null || item.Foto == "")
+                    {
+                        <td>
+                            Não possui foto
 
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            Possui foto
+                        </td>
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descricao)
+                    </td>
+                    <td>
+                        @item.ClinicaEndereco.CidadeDistrito - @item.ClinicaEndereco.Rua, @item.ClinicaEndereco.Numero
+                    </td>
+                    <td>
+
+                        <button class="button-edit"><i class="bi bi-pencil-square btnEditar" data-value="@item.Id"></i></button>
+                        <button class="button-delete"><i class="bi bi-trash btnExcluir" data-value="@item.Id"></i></button>
+                        <button class="button-details"><i class="bi bi-zoom-in btnDetalhes" data-value="@item.Id"></i></button>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
