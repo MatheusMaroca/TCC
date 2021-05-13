@@ -43,6 +43,7 @@ namespace TCC
                 opts.Password.RequireLowercase = false;
                 opts.Password.RequireUppercase = false;
                 opts.Password.RequireDigit = false;
+                opts.SignIn.RequireConfirmedEmail = false;
             });
         }
 
