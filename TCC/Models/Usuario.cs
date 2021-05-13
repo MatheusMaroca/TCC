@@ -14,7 +14,7 @@ namespace TCC.Models
         [Column(TypeName ="VARCHAR(11)")]
         public string Cpf { get; set; }
         [Required]
-        [Column(TypeName = "VARCHAR(9)")]        
+        [Column(TypeName = "VARCHAR(14)")]        
         public string Rg { get; set; }
 
         [Required]

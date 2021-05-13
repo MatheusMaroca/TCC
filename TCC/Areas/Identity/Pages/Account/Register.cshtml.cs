@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using TCC.Data;
+using TCC.Extensions;
 using TCC.Models;
 
 namespace TCC.Areas.Identity.Pages.Account
@@ -50,62 +51,70 @@ namespace TCC.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "{0} - Campo requerido")]
             [MinLength(5, ErrorMessage = "O campo deve conter ao menos 5 caracteres.")]
             [MaxLength(100, ErrorMessage = "O campo deve conter no máximo 100 caracteres.")]
-            [Display(Name = "Name")]
+            [Display(Name = "Nome Completo")]
             public string Name { get; set; }
 
-            [Required]
-            [Phone]
+            [Required(ErrorMessage = "{0} - Campo requerido")]
+            [StringLength(14, MinimumLength = 13, ErrorMessage = "Informe o telefone corretamente.")]
+            [Display(Name = "Celular/Telefone")]
             public string Phone { get; set; }
 
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "{0} - Campo requerido")]
+            [EmailAddress(ErrorMessage = "Email inválido")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
-            [EmailAddress]
-            [Display(Name = "Confirm Email")]
+            [Required(ErrorMessage = "{0} - Campo requerido")]
+            [EmailAddress(ErrorMessage = "Email inválido")]
+            [Display(Name = "Confirmar email")]
             [Compare("Email", ErrorMessage = "Os emails não conferem.")]
             public string ConfirmEmail { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "A {0} tem que ter no mínimo {2} caracteres", MinimumLength = 6)]
+            [Required(ErrorMessage = "{0} - Campo requerido")]
+            [StringLength(100, ErrorMessage = "A {0} tem que ter no mínimo {2} caracteres", MinimumLength = 8)]
             [DataType(DataType.Password)]
             [Display(Name = "Senha")]
             public string Password { get; set; }
 
+            [Required(ErrorMessage = "{0} - Campo requerido")]
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "As senha não conferem.")]
             public string ConfirmPassword { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "{0} - Campo requerido")]
+            [CustomValidationCPF(ErrorMessage = "CPF inválido")]
             [Display(Name = "Cpf")]
             public string Cpf { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "{0} - Campo requerido")]
             [Display(Name = "Rg")]
-            [StringLength(9, MinimumLength = 9, ErrorMessage = "O RG deve conter 9 caracteres")]
+            [MinLength(7, ErrorMessage = "O campo deve conter ao menos 7 caracteres.")]
+            [MaxLength(14, ErrorMessage = "O campo deve conter no máximo 14 caracteres.")]
             public string Rg { get; set; }
 
+            [Required(ErrorMessage = "{0} - Campo requerido")]
+            [Display(Name = "Cidade/Distrito")]
             public string CidadeDistrito { get; set; }
 
+            [Required(ErrorMessage = "{0} - Campo requerido")]
+            [Display(Name = "Região")]
             public string Regiao { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "{0} - Campo requerido")]
             [Display(Name = "Rua")]
             [StringLength(100, MinimumLength = 3, ErrorMessage = "O campo deve conter entre 3 e 100 caracteres")]
             public string Rua { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "{0} - Campo requerido")]
             [Display(Name = "Bairro")]
             [StringLength(100, MinimumLength = 3, ErrorMessage = "O campo deve conter entre 3 e 100 caracteres")]
             public string Bairro { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "{0} - Campo requerido")]
             [Display(Name = "Número")]
             public string Numero { get; set; }
 
@@ -120,17 +129,26 @@ namespace TCC.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            List<string> erros = new List<string>();
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            if (ModelState.IsValid)
+            if (_context.Users.Where(c => c.Cpf == Input.Cpf).Count() > 0)
+            {
+                erros.Add("Cpf já cadastrado");
+            }
+            if (_context.Users.Where(c => c.Rg == Input.Rg).Count() > 0)
+            {
+                erros.Add("Cpf já cadastrado");
+            }
+            if (ModelState.IsValid && erros.Count == 0)
             {
                 var user = new Usuario { UserName = Input.Email, Email = Input.Email, Cpf = Input.Cpf, Rg = Input.Rg, NomeCompleto = Input.Name, PhoneNumber = Input.Phone, EmailConfirmed = true };
                 var result = await _userManager.CreateAsync(user, Input.Password);
-                UsuarioEndereco userEnd = new UsuarioEndereco { UsuarioId = user.Id, Bairro = Input.Bairro, CidadeDistrito = Input.CidadeDistrito, Numero = Convert.ToInt32(Input.Numero), Regiao = Input.Regiao, Rua = Input.Rua };
-                _context.UsuariosEnderecos.Add(userEnd);
-                _context.SaveChanges();
                 if (result.Succeeded)
                 {
+                    UsuarioEndereco userEnd = new UsuarioEndereco { UsuarioId = user.Id, Bairro = Input.Bairro, CidadeDistrito = Input.CidadeDistrito, Numero = Convert.ToInt32(Input.Numero), Regiao = Input.Regiao, Rua = Input.Rua };
+                    _context.UsuariosEnderecos.Add(userEnd);
+                    _context.SaveChanges();
                     _logger.LogInformation("User created a new account with password.");
 
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -162,7 +180,10 @@ namespace TCC.Areas.Identity.Pages.Account
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-
+            foreach (var error in erros)
+            {
+                ModelState.AddModelError(string.Empty, error);
+            }
             // If we got this far, something failed, redisplay form
             return Page();
         }
