@@ -97,7 +97,7 @@ namespace TCC.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Dados incorretos. Verifique e tente novamente.");
                     return Page();
                 }
             }
