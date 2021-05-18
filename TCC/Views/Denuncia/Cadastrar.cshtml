@@ -9,22 +9,23 @@
 <div class="row">
     <div class="col-md-4">
         <form enctype="multipart/form-data" asp-action="Cadastrar">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger" id="teste"></div>
             <div class="form-group">
                 <label asp-for="Descricao" class="control-label">Descrição</label>
-                <input asp-for="Descricao" class="form-control" />
+                <textarea asp-for="Descricao" class="form-control" maxlength=500></textarea>
                 <span asp-validation-for="Descricao" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="control-label">Foto</label>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="imagem" id="customFile">
+                    <input type="file" class="custom-file-input" name="imagem" id="customFile" accept="image/png, image/jpeg" >
                     <label class="custom-file-label" for="customFile">Escolha a imagem</label>
                 </div>                
             </div>
             <div class="form-group">
                 <label asp-for="DenunciaEndereco.CidadeDistrito">Cidade/Distrito</label>
-                <select asp-for="DenunciaEndereco.CidadeDistrito" class="form-control">
+                <select asp-for="DenunciaEndereco.CidadeDistrito" class="form-control" id="cidade">
+                    <option value="" disabled selected hidden>Selecione</option>
                     <option value="Londrina">Londrina</option>
                     <option value="Warta">Warta</option>
                     <option value="São Luís">São Luís</option>
@@ -32,12 +33,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="DenunciaEndereco.Regiao">Região</label>
-                <select asp-for="DenunciaEndereco.Regiao" class="form-control">
+                <select asp-for="DenunciaEndereco.Regiao" class="form-control" id="regiao">
+                    <option value="" disabled selected hidden>Selecione</option>
                     <option value="Norte">Norte</option>
                     <option value="Sul">Sul</option>
                     <option value="Centro">Centro</option>
                     <option value="Leste">Leste</option>
                     <option value="Oeste">Oeste</option>
+                    <option value="---" hidden>---</option>
                 </select>
             </div>
             <div class="form-group">
@@ -47,8 +50,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="DenunciaEndereco.Bairro">Bairro</label>
-                <input asp-for="DenunciaEndereco.Bairro" class="form-control" />
+                <input asp-for="DenunciaEndereco.Bairro" class="form-control" id="bairro"/>
                 <span asp-validation-for="DenunciaEndereco.Bairro" class="text-danger"></span>
+                <input type="checkbox" id="semBairro"/>Não sei o bairro.
             </div>
             <div class="form-group">
                 <label asp-for="DenunciaEndereco.Numero">Número</label>
@@ -69,10 +73,41 @@
 
     <script type="text/javascript">
 
-        // Add the following code if you want the name of the file appear on select
-        $(".custom-file-input").on("change", function () {
-            var fileName = $(this).val().split("\\").pop();
-            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        $("#cidade").change(function () {
+            if ($(this).val() != "" && $(this).val() != "Londrina") {
+                $("#regiao").val($('option:contains("---")').val());
+                $("#regiao").prop('disabled', true)
+                $("#bairro").val('---');
+                $("#bairro").prop('disabled', true)                   
+                $("#semBairro").prop('disabled', true)                
+            }
+            else {
+                $("#regiao").val($('option:contains("")').val());
+                $("#regiao").prop('disabled', false)
+                $("#bairro").val('');
+                $("#bairro").prop('disabled', false)                
+                $("#semBairro").prop('disabled', false)
+                $("#semBairro").prop('checked', false)
+            }
         });
+
+        $('#semBairro').on('click', function () {
+            var checkbox = $('#semBairro:checked').length;            
+
+            if (checkbox === 1) {
+                $("#bairro").val('---');
+                $("#bairro").prop('disabled', true)
+            }
+            else {
+                $("#bairro").val('');
+                $("#bairro").prop('disabled', false)
+            }
+        });
+
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {            
+            var fileName = $(this).val().split("\\").pop();            
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });        
     </script>
 }
