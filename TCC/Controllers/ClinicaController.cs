@@ -28,6 +28,11 @@ namespace TCC.Controllers
             return View(_context.Clinicas.Include(c => c.ClinicaEndereco).ToList());
         }
 
+        public IActionResult ClinicasParceiras()
+        {
+            return View(_context.Clinicas.Include(c => c.ClinicaEndereco).ToList());
+        }
+
         public IActionResult Editar(int? id)
         {
             if (id == null)
