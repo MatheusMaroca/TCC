@@ -84,7 +84,7 @@
 @section scripts{
 
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function () {           
 
             $.ajaxSetup({ cache: false });
             $(".btnDetalhes").click(function () {
@@ -117,12 +117,20 @@
             });
         });
 
+
+
         $('#tablecliente').DataTable({
             dom: 'Bfrtip',
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'
             ]
 
+        });
+
+        $(".custom-file-input").on("change", function () {
+            console.log("aqui");
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
     </script>
 

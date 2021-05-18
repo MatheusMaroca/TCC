@@ -13,15 +13,19 @@ namespace TCC.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "{0} - Campo requerido")]
         [Column(TypeName = "VARCHAR(500)")]
         [Display(Name = "Descrição")] 
         public string Descricao { get; set; }
+
         public string Foto { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "{0} - Campo requerido")]
         [Column(TypeName = "VARCHAR(100)")]
         public string Status { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "{0} - Campo requerido")]
         [Column(TypeName = "DATE")]
         [Display(Name = "Data Realizada")]
         public DateTime DataRealizada { get; set; }

@@ -9,17 +9,23 @@ namespace TCC.Models
 {
     public class Endereco
     {
-        [Required]
+        [Required(ErrorMessage = "{0} - Campo requerido")]
         [Column(TypeName = "VARCHAR(100)")]
-        public string CidadeDistrito { get; set; }        
+        public string CidadeDistrito { get; set; }
+
+        [Required(ErrorMessage = "{0} - Campo requerido")]
         [Column(TypeName = "VARCHAR(100)")]
         public string Regiao { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "{0} - Campo requerido")]
         [Column(TypeName = "VARCHAR(100)")]
         public string Rua { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "{0} - Campo requerido")]
+        [Range(1, int.MaxValue, ErrorMessage = "Número inválido")]
         public int Numero { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "{0} - Campo requerido")]
         [Column(TypeName = "VARCHAR(100)")]
         public string Bairro { get; set; }
     }

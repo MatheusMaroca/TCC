@@ -29,13 +29,10 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Agendamento" asp-action="Termos">Agendamento</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Denuncia" asp-action="Cadastrar">Denúncia</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Clinica" asp-action="Cadastrar">Clinicas Parceiras</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#">Sobre</a>
                         </li>
                     </ul>
                 </div>
@@ -43,8 +40,8 @@
         </nav>
     </header>
     <div class="buttons">
-        <a href="~/Agendamento/Termos" class="btn-home">Agendamento</a>
-        <a href="~/Denuncia/Cadastrar" class="btn-home2">Denúncia</a>
+        <a class="btn-home" asp-controller="Agendamento" asp-action="Termos">Agendamento</a>
+        <a class="btn-home2" asp-controller="Denuncia" asp-action="Cadastrar">Denúncia</a>
     </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
