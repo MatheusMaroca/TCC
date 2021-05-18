@@ -225,17 +225,16 @@ body {
 
 .login {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
     color: #212529;
     text-align: left;
-    background-color: #fff;
+    background-color: #4570c67a;
 }
 
 .ftco-section {
-    padding: 4em 0;
+    padding: 7em 0;
 }
 
 .login-wrap {
@@ -250,13 +249,13 @@ body {
     .login-wrap h3 {
         font-weight: 700;
         font-size: 20px;
-        color: #8d448b;
+        color: #426dc6;
     }
 
     .login-wrap .icon {
         width: 80px;
         height: 80px;
-        background: #8d448b;
+        background: #426dc6;
         border-radius: 50%;
         font-size: 30px;
         margin: 0 auto;
@@ -281,7 +280,7 @@ body {
 
 @media (max-width: 767.98px) {
     .form-group .submit {
-        top: 0;
+        top: 10px;
     }
 }
 
@@ -341,11 +340,11 @@ body {
 }
 
 .checkbox-primary {
-    color: #8d448b;
+    color: #426dc6;
 }
 
     .checkbox-primary input:checked ~ .checkmark:after {
-        color: #8d448b;
+        color: #426dc6;
     }
 
 
@@ -353,7 +352,7 @@ body {
     -webkit-transition: .3s all ease;
     -o-transition: .3s all ease;
     transition: .3s all ease;
-    color: #8d448b;
+    color: #426dc6;
 }
 
     .a-login:hover, a:focus {
@@ -361,5 +360,30 @@ body {
         outline: none !important;
         -webkit-box-shadow: none;
         box-shadow: none;
-        color: #8d448b;
+        color: #2c67de;
+    }
+
+.btn-login {
+    background: #426dc6;
+    display: inline-block;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+}
+
+
+    .btn-login:hover {
+        color: #fff;
+        text-decoration: none;
+        background: #2c67de;
     }
