@@ -100,7 +100,7 @@ namespace TCC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Cadastrar(Clinica model, IFormFile imagem)
+        public IActionResult Cadastrar(Clinica model, IFormFile imagem)
         {
 
             if(model == null)
@@ -113,7 +113,7 @@ namespace TCC.Controllers
                 model.Id = 0;
 
                 string nomeUnicoArquivo = UploadedFile(imagem);
-                
+
                 /*Clinica clinica = new Clinica
                 {
                     ClinicaEndereco = model.ClinicaEndereco,
@@ -122,6 +122,7 @@ namespace TCC.Controllers
                     Nome = model.Nome,
                     Telefone = model.Telefone
                 };*/
+                model.Foto = nomeUnicoArquivo;
 
                 _context.Clinicas.Add(model);
                 _context.SaveChanges();
