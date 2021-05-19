@@ -102,20 +102,30 @@ namespace TCC.Controllers
         [HttpPost]
         public async Task<IActionResult> Cadastrar(Clinica model, IFormFile imagem)
         {
+
+            if(model == null)
+            {
+                return NotFound();
+            }
+
             try
             {
+                model.Id = 0;
+
                 string nomeUnicoArquivo = UploadedFile(imagem);
-                Clinica clinica = new Clinica
+                
+                /*Clinica clinica = new Clinica
                 {
                     ClinicaEndereco = model.ClinicaEndereco,
                     Descricao = model.Descricao,
                     Foto = nomeUnicoArquivo,
                     Nome = model.Nome,
                     Telefone = model.Telefone
-                };
+                };*/
 
-                _context.Clinicas.Add(clinica);
-                await _context.SaveChangesAsync();
+                _context.Clinicas.Add(model);
+                _context.SaveChanges();
+
                 return RedirectToAction("Index", "Clinica");
             }
             catch (Exception ex)
