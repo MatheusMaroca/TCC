@@ -21,7 +21,7 @@ namespace TCC.Models
 
         [Required(ErrorMessage = "{0} - Campo requerido")]
         [StringLength(14, MinimumLength = 13, ErrorMessage = "Informe o telefone corretamente.")]
-        [Column(TypeName = "VARCHAR(11)")]
+        [Column(TypeName = "VARCHAR(14)")]
         public string Telefone { get; set; }
 
         public string Foto { get; set; }
