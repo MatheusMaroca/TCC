@@ -43,11 +43,11 @@ namespace TCC.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "{0} - Campo requerido")]
+            [EmailAddress(ErrorMessage = "Email inválido")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Senha - Campo requerido")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
@@ -85,15 +85,6 @@ namespace TCC.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
-                }
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-                }
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToPage("./Lockout");
                 }
                 else
                 {
