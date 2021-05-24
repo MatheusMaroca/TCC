@@ -15,18 +15,25 @@ namespace TCC.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "{0} - Campo requerido")]
         [CustomValidationCPF(ErrorMessage = "CPF inválido")]
         [Column(TypeName = "VARCHAR(11)")]
         public string Cpf { get; set; }
 
+        [Required(ErrorMessage = "{0} - Campo requerido")]
+        [StringLength(14, MinimumLength = 13, ErrorMessage = "Informe o telefone corretamente.")]
+        [Column(TypeName = "VARCHAR(14)")]
+        [Display(Name = "Celular/Telefone")]
+        public string Telefone { get; set; }
+
         [Column(TypeName = "VARCHAR(100)")]
+        [Display(Name = "Nome do denunciado")]
         public string NomeDenunciado { get; set; }
 
         [Column(TypeName = "VARCHAR(100)")]
         public string HorarioComGente { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "{0} - Campo requerido")]
         [Column(TypeName = "VARCHAR(100)")]
         public string TipoDenuncia { get; set; }
 
