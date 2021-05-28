@@ -10,7 +10,7 @@
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login-Castramóvel</title>
+    <title>Login - Castramóvel</title>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/site.css" />
@@ -31,16 +31,13 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav mx-auto text-md-center text-left">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Agendamento" asp-action="Termos">Agendamento</a>
+                            <a class="nav-link" asp-area="" asp-controller="Clinica" asp-action="ClinicasParceiras">Clínicas Parceiras</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Denuncia" asp-action="Cadastrar">Denúncia</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Clinica" asp-action="Cadastrar">Clinicas Parceiras</a>
+                            <a class="nav-link" asp-controller="Home" asp-action="Sobre">Sobre</a>
                         </li>
                     </ul>
                 </div>
@@ -60,11 +57,11 @@
 
                             <div asp-validation-summary="All" class="text-danger"></div>
                             <div class="form-group">
-                                <input asp-for="Input.Email" class="form-control rounded-left" placeholder="Email" />
+                                <input asp-for="Input.Email" class="form-controls rounded-left" placeholder="Email" />
                                 <span asp-validation-for="Input.Email" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <input asp-for="Input.Password" class="form-control rounded-left" placeholder="Senha" />
+                                <input asp-for="Input.Password" class="form-controls rounded-left" placeholder="Senha" />
                                 <span asp-validation-for="Input.Password" class="text-danger"></span>
                             </div>
                             <div class="form-group">

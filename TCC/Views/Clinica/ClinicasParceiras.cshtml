@@ -1,5 +1,75 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<TCC.Models.Clinica>
+
 @{
+    Layout = null;
 }
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clínicas Parceiras - Castramóvel</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="shortcut icon" type="image/jpg" href="~/pet.ico" />
+</head>
+<body class="login">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-toggleable-lg navbar-light bg-white border-bottom box-shadow mb-3 justify-content-md-center justify-content-startnavbar-light">
+            <div class="container">
+                <img src="~/pet.ico" id="logo" />
+                <a class="navbar-home" asp-area="" asp-controller="Home" asp-action="Index">Castramóvel</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-lg-inline-flex flex-lg-row-reverse">
+                    <partial name="_LoginPartial" />
+                    <ul class="navbar-nav mx-auto text-md-center text-left">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Clinica" asp-action="ClinicasParceiras">Clínicas Parceiras</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Sobre">Sobre</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="teste">
+        @foreach (var item in Model)
+        {
+            <div class="wrapper">
+                <div class="foto">
+                    @Html.DisplayFor(modelItem => item.Foto)
+
+                    @if (item.Foto != null || item.Foto == "")
+                    {
+                        <img src="~/Imagens/Clinicas/" class="rounded-circle" height="100" width="100" asp-append-version="true" />
+                    }
+                    else
+                    {
+                        <img src="~/Imagens/Clinicas/default.png" class="rounded-circle" height="100" width="100" asp-append-version="true" />
+                    }
+                </div>
+                @Html.DisplayFor(modelItem => item.Nome) <br />
+                @Html.DisplayFor(modelItem => item.Descricao)<br />
+                @Html.DisplayFor(modelItem => item.Telefone)<br />
+
+
+
+                @item.ClinicaEndereco.CidadeDistrito - @item.ClinicaEndereco.Rua, @item.ClinicaEndereco.Numero
+            </div>
+
+        }
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
