@@ -6,66 +6,70 @@
 
 <h1>Index</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Descrição
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Foto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                Data Realizada
-            </th>
-            <th>
-                Endereço
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="table-responsive">
+    <table id="tablecliente" class="table table-bordered">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descricao)
-                </td>
-                @if (item.Foto == null || item.Foto == "")
-                {
-                    <td>
-                        Não possui foto
-
-                    </td>
-                }
-                else
-                {
-                    <td>
-                        Possui foto
-                    </td>
-                }
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @item.DataRealizada.ToString("dd/MM/yyyy")
-                </td>
-                <td>
-                    @item.DenunciaEndereco.CidadeDistrito - @item.DenunciaEndereco.Rua, @item.DenunciaEndereco.Numero
-                </td>
-                <td>
-                    <a href="#" class="btn btn-default btnEditar" data-value="@item.Id">Editar</a> ||
-                    <a href="#" class="btn btn-default btnDetalhes" data-value="@item.Id">Detalhes</a> ||
-                    <a href="#" class="btn btn-default btnExcluir" data-value="@item.Id">Excluir</a>
-                </td>
+                <th>
+                    Descrição
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Foto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    Data Realizada
+                </th>
+                <th>
+                    Endereço
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descricao)
+                    </td>
+                    @if (item.Foto == null || item.Foto == "")
+                    {
+                        <td>
+                            Não possui foto
+
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            Possui foto
+                        </td>
+                    }
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @item.DataRealizada.ToString("dd/MM/yyyy")
+                    </td>
+                    <td>
+                        @item.DenunciaEndereco.CidadeDistrito - @item.DenunciaEndereco.Rua, @item.DenunciaEndereco.Numero
+                    </td>
+                    <td>
+
+                        <button class="button-edit"><i class="bi bi-pencil-square btnEditar" data-value="@item.Id"></i></button>
+                        <button class="button-delete"><i class="bi bi-trash btnExcluir" data-value="@item.Id"></i></button>
+                        <button class="button-details"><i class="bi bi-zoom-in btnDetalhes" data-value="@item.Id"></i></button>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -98,6 +102,29 @@
                 });
             });
         });
+
+        $('#tablecliente').DataTable({
+            dom: 'Bfrtip',
+            "iDisplayLength": 3,
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
+            language: {
+                sInfo: 'Mostrando _START_ a _END_ de _TOTAL_ resultados.',
+                zeroRecords: 'Nada encontrado.',
+                sInfoEmpty: 'Sem resultados para mostrar',
+                sInfoFiltered: 'Filtrado de _MAX_ resultados.',
+                sSearch: 'Pesquisar: ',
+
+                oPaginate: {
+                    sNext: 'Próximo',
+                    sPrevious: 'Anterior',
+                }
+            }
+
+        });
+
+
     </script>
 
 }

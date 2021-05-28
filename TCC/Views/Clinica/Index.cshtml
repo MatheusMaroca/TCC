@@ -27,7 +27,7 @@
                 <th>
                     Endereço
                 </th>
-                <th>Ação</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -84,7 +84,7 @@
 @section scripts{
 
     <script type="text/javascript">
-        $(document).ready(function () {           
+        $(document).ready(function () {
 
             $.ajaxSetup({ cache: false });
             $(".btnDetalhes").click(function () {
@@ -121,9 +121,22 @@
 
         $('#tablecliente').DataTable({
             dom: 'Bfrtip',
+            "iDisplayLength": 3,
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
+            ],
+            language: {
+                sInfo: 'Mostrando _START_ a _END_ de _TOTAL_ resultados.',
+                zeroRecords: 'Nada encontrado.',
+                sInfoEmpty: 'Sem resultados para mostrar',
+                sInfoFiltered: 'Filtrado de _MAX_ resultados.',
+                sSearch: 'Pesquisar: ',
+
+                oPaginate: {
+                    sNext: 'Próximo',
+                    sPrevious: 'Anterior',
+                }
+            }
 
         });
 
