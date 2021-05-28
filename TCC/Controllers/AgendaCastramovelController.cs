@@ -31,8 +31,8 @@ namespace TCC.Controllers
                 model.Data = data;
                 _context.AgendasCastramovel.Add(model);
                 data = data.AddDays(1);
+                _context.SaveChanges();
             }
-            _context.SaveChanges();
 
             return View();
         }
