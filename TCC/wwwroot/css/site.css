@@ -35,8 +35,8 @@ a.navbar-brand {
 /* Main */
 
 .main {
-    background-color: red;
-    text-align: center;
+    background-color: white;
+    text-align: justify;
 }
 
 /* Provide sufficient contrast against white background */
@@ -207,7 +207,7 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
-    background-color: #4570c6;
+    background-color: #4570c67a;
 }
 
 .footer {
@@ -452,8 +452,10 @@ body {
     /* margin-right: 10px; */
     list-style: none;
     flex: 0 0 33.333333%;
+    background-color: white;
 }
 
 .foto {
     margin-right: 7px;
+    background-color: wheat;
 }
