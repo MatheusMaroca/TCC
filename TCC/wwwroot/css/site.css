@@ -413,22 +413,18 @@ body {
 }
 
 .form-controls::-webkit-input-placeholder {
-    /* Chrome/Opera/Safari */
     color: rgba(0, 0, 0, 0.2) !important;
 }
 
 .form-controls::-moz-placeholder {
-    /* Firefox 19+ */
     color: rgba(0, 0, 0, 0.2) !important;
 }
 
 .form-controls:-ms-input-placeholder {
-    /* IE 10+ */
     color: rgba(0, 0, 0, 0.2) !important;
 }
 
 .form-controls:-moz-placeholder {
-    /* Firefox 18- */
     color: rgba(0, 0, 0, 0.2) !important;
 }
 
@@ -441,19 +437,21 @@ body {
 }
 /* clinicas parceiras 
 -------------------------------------------------- */
-
-
-.wrapper {
-    display: flex;
-    flex-direction: row;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.teste {
+.parent {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    flex-wrap: wrap;
+    padding-left: 0;
+}
+
+.child {
+    display: flex;
+    /* flex-direction: row; */
+    /* margin-left: 10px; */
+    /* margin-right: 10px; */
+    list-style: none;
+    flex: 0 0 33.333333%;
 }
 
 .foto {
