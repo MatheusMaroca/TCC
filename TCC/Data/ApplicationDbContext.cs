@@ -22,6 +22,7 @@ namespace TCC.Data
         public DbSet<Denuncia> Denuncias { get; set; }
         public DbSet<DenunciaEndereco> DenunciasEnderecos { get; set; }
         public DbSet<UsuarioEndereco> UsuariosEnderecos { get; set; }
+        public DbSet<Horarios> Horarios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

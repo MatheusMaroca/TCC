@@ -11,6 +11,8 @@ namespace TCC.Controllers
 {
     public class AgendamentoController : Controller
     {
+        private HorariosController horario;
+
         private readonly ApplicationDbContext _context;
         public AgendamentoController(ApplicationDbContext context)
         {
@@ -31,9 +33,9 @@ namespace TCC.Controllers
         public IActionResult Cadastrar(Agendamento model)
         {
             //_context.Entidade.Tolist(); #getAll;
-            int result = VerificaHorario(model);
+            Boolean result = horario.verificaHorario(model);
 
-            if (result == 1)
+            if (result == false)
             {
                 return View("Horario ocupado");
             }
@@ -57,7 +59,7 @@ namespace TCC.Controllers
                 return NotFound();
             }
 
-            Agendamento agendamento = _context.Agendamentos.Include(a => a.Horario).First(a => a.Id == id);
+            Agendamento agendamento = _context.Agendamentos.Include(a => a.Horarios).First(a => a.Id == id);
             if (agendamento == null)
             {
                 return NotFound();
@@ -101,19 +103,19 @@ namespace TCC.Controllers
             return _context.Agendamentos.Any(e => e.Id == id);
         }
 
-        private int VerificaHorario (Agendamento model)
+        /*private int VerificaHorario (Agendamento model)
         {
             List<Agendamento> lista = _context.Agendamentos.ToList();
 
             foreach (Agendamento agendamento in lista){
                 
-                if(model.Horario == agendamento.Horario)
+                if(model.Horarios == agendamento.Horarios)
                 {
                     return 1;
                 }
             }
 
             return 0;
-        }
+        }*/
     }
 }
