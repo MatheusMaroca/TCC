@@ -12,6 +12,9 @@ namespace TCC.Controllers
     public class AgendaCastramovelController : Controller
     {
         private readonly ApplicationDbContext _context;
+
+        private HorariosController hora;
+
         public AgendaCastramovelController(ApplicationDbContext context)
         {
             _context = context;
@@ -29,6 +32,7 @@ namespace TCC.Controllers
             {
                 model.Id = 0;
                 model.Data = data;
+                hora.Cadastrar(model);
                 _context.AgendasCastramovel.Add(model);
                 data = data.AddDays(1);
                 _context.SaveChanges();
@@ -51,7 +55,8 @@ namespace TCC.Controllers
                 return NotFound();
             }
             model.Id = 0;
-
+            hora.Cadastrar(model);
+            
             _context.AgendasCastramovel.Add(model);
             _context.SaveChanges();
 
