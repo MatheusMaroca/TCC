@@ -87,15 +87,15 @@
         $("#cidade").change(function () {
             if ($(this).val() != "" && $(this).val() != "Londrina") {
                 $("#regiao").val($('option:contains("---")').val());
-                $("#regiao").prop('disabled', true)
+                $("#regiao").prop('readonly', true)
                 $("#bairro").val('---');
-                $("#bairro").prop('disabled', true)
+                $("#bairro").prop('readonly', true)
             }
             else {
                 $("#regiao").val($('option:contains("")').val());
-                $("#regiao").prop('disabled', false)
+                $("#regiao").prop('readonly', false)
                 $("#bairro").val('');
-                $("#bairro").prop('disabled', false)
+                $("#bairro").prop('readonly', false)
             }
         });
         // Add the following code if you want the name of the file appear on select

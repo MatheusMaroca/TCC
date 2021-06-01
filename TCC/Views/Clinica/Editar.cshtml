@@ -14,68 +14,65 @@
             <input type="hidden" asp-for="ClinicaEndereco.Id" />
             <input type="hidden" asp-for="ClinicaEndereco.ClinicaId" />
             <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
+                <label asp-for="Nome" class="control-label">Nome</label>
                 <input asp-for="Nome" class="form-control" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Telefone" class="control-label"></label>
-                <input asp-for="Telefone" class="form-control" />
+                <label asp-for="Telefone" class="control-label">Telefone</label>
+                <input asp-for="Telefone" class="form-control" id="telefone" pattern="\([0-9]{2}\)[\s][0-9]{8,9}" type="tel" />
                 <span asp-validation-for="Telefone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Foto" class="control-label"></label>
-                <input asp-for="Foto" class="form-control" />
-                <span asp-validation-for="Foto" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Descricao" class="control-label"></label>
-                <input asp-for="Descricao" class="form-control" />
+                <label asp-for="Descricao" class="control-label">Descrição</label>
+                <textarea asp-for="Descricao" class="form-control" maxlength=500></textarea>
                 <span asp-validation-for="Descricao" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="control-label">Foto</label>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="imagem" id="customFile">
+                    <input type="file" class="custom-file-input" name="imagem" id="customFile" accept="image/png, image/jpeg">
                     <label class="custom-file-label" for="customFile">Escolha a imagem</label>
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="ClinicaEndereco.CidadeDistrito"></label>
-                <select asp-for="ClinicaEndereco.CidadeDistrito" class="form-control">
+                <label asp-for="ClinicaEndereco.CidadeDistrito">Cidade/Destrito</label>
+                <select asp-for="ClinicaEndereco.CidadeDistrito" class="form-control" id="cidade">
+                    <option value="" disabled selected hidden>Selecione</option>
                     <option value="Londrina">Londrina</option>
                     <option value="Warta">Warta</option>
                     <option value="São Luís">São Luís</option>
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="ClinicaEndereco.Regiao"></label>
-                <select asp-for="ClinicaEndereco.Regiao" class="form-control">
+                <label asp-for="ClinicaEndereco.Regiao">Região</label>
+                <select asp-for="ClinicaEndereco.Regiao" class="form-control" id="regiao">
+                    <option value="" disabled selected hidden>Selecione</option>
                     <option value="Norte">Norte</option>
                     <option value="Sul">Sul</option>
                     <option value="Centro">Centro</option>
                     <option value="Leste">Leste</option>
                     <option value="Oeste">Oeste</option>
+                    <option value="---" hidden>---</option>
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="ClinicaEndereco.Rua"></label>
+                <label asp-for="ClinicaEndereco.Rua">Rua</label>
                 <input asp-for="ClinicaEndereco.Rua" class="form-control" />
                 <span asp-validation-for="ClinicaEndereco.Rua" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ClinicaEndereco.Bairro"></label>
-                <input asp-for="ClinicaEndereco.Bairro" class="form-control" />
+                <label asp-for="ClinicaEndereco.Bairro">Bairro</label>
+                <input asp-for="ClinicaEndereco.Bairro" class="form-control" id="bairro" />
                 <span asp-validation-for="ClinicaEndereco.Bairro" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ClinicaEndereco.Numero"></label>
+                <label asp-for="ClinicaEndereco.Numero">Número</label>
                 <input asp-for="ClinicaEndereco.Numero" class="form-control" />
                 <span asp-validation-for="ClinicaEndereco.Numero" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Salvar" class="btn btn-primary" />
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -85,4 +82,34 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#telefone').mask("(99) 000000000");
+            $('#cpf').mask("00000000000");
+            $('#rg').mask("00000000000000");
+        });
+
+        $("#cidade").change(function () {
+            if ($(this).val() != "" && $(this).val() != "Londrina") {
+                $("#regiao").val($('option:contains("---")').val());
+                $("#regiao").prop('readonly', true)
+                $("#bairro").val('---');
+                $("#bairro").prop('readonly', true)
+            }
+            else {
+                $("#regiao").val($('option:contains("")').val());
+                $("#regiao").prop('readonly', false)
+                $("#bairro").val('');
+                $("#bairro").prop('readonly', false)
+            }
+        });
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            console.log("aqui");
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+
+    </script>
 }
