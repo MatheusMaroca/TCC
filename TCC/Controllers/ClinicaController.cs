@@ -109,19 +109,8 @@ namespace TCC.Controllers
             }
 
             try
-            {
-                model.Id = 0;
-
+            {                
                 string nomeUnicoArquivo = UploadedFile(imagem);
-
-                /*Clinica clinica = new Clinica
-                {
-                    ClinicaEndereco = model.ClinicaEndereco,
-                    Descricao = model.Descricao,
-                    Foto = nomeUnicoArquivo,
-                    Nome = model.Nome,
-                    Telefone = model.Telefone
-                };*/
                 model.Foto = nomeUnicoArquivo;
 
                 _context.Clinicas.Add(model);
@@ -146,7 +135,7 @@ namespace TCC.Controllers
             if (clinica == null)
             {
                 return NotFound();
-            }
+            }            
 
             return View(clinica);
         }

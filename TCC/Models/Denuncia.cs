@@ -35,6 +35,7 @@ namespace TCC.Models
 
         [Required(ErrorMessage = "{0} - Campo requerido")]
         [Column(TypeName = "VARCHAR(100)")]
+        [Display(Name = "A denúncia é referente à")]
         public string TipoDenuncia { get; set; }
 
         [Required(ErrorMessage = "{0} - Campo requerido")]

@@ -10,17 +10,22 @@
     <div class="col-md-8">
         <form enctype="multipart/form-data" asp-action="Cadastrar">
             <div asp-validation-summary="ModelOnly" class="text-danger" id="teste"></div>
+            <h2>Denunciante</h2>
             <div class="form-group">
-                <label asp-for="Descricao" class="control-label">Descrição</label>
-                <textarea asp-for="Descricao" class="form-control" maxlength=500></textarea>
-                <span asp-validation-for="Descricao" class="text-danger"></span>
+                <label asp-for="Cpf" class="control-label"></label>
+                <input asp-for="Cpf" class="form-control" id="cpf" placeholder="Apenas números">
+                <span asp-validation-for="Cpf" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">Foto</label>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="imagem" id="customFile" accept="image/png, image/jpeg" >
-                    <label class="custom-file-label" for="customFile">Escolha a imagem</label>
-                </div>                
+                <label asp-for="Telefone" class="control-label"></label>
+                <input asp-for="Telefone" class="form-control" id="telefone">
+                <span asp-validation-for="Telefone" class="text-danger"></span>
+            </div>
+            <h2>Denunciado</h2>
+            <div class="form-group">
+                <label asp-for="NomeDenunciado" class="control-label"></label>
+                <input asp-for="NomeDenunciado" class="form-control" />
+                <span asp-validation-for="NomeDenunciado" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DenunciaEndereco.CidadeDistrito">Cidade/Distrito</label>
@@ -52,13 +57,44 @@
                 <label asp-for="DenunciaEndereco.Bairro">Bairro</label>
                 <input asp-for="DenunciaEndereco.Bairro" class="form-control" id="bairro"/>
                 <span asp-validation-for="DenunciaEndereco.Bairro" class="text-danger"></span>
-                <input type="checkbox" id="semBairro"/>Não sei o bairro.
+                <input type="checkbox" id="semBairro" />Não sei o bairro.
             </div>
             <div class="form-group">
                 <label asp-for="DenunciaEndereco.Numero">Número</label>
                 <input asp-for="DenunciaEndereco.Numero" class="form-control" />
                 <span asp-validation-for="DenunciaEndereco.Numero" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="HorarioComGente" class="control-label">Período com gente</label><br />
+                <input asp-for="HorarioComGente" class="custom-radio" type="radio" value="Manhã" />Manhã<br />
+                <input asp-for="HorarioComGente" class="custom-radio" type="radio" value="Tarde" />Tarde<br />
+                <input asp-for="HorarioComGente" class="custom-radio" type="radio" value="Noite" />Noite<br />
+                <span asp-validation-for="HorarioComGente" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TipoDenuncia" class="control-label"></label><br />
+                <input asp-for="TipoDenuncia" class="custom-radio" type="radio" value="Domestico" />Animal doméstico / residência<br />
+                <input asp-for="TipoDenuncia" class="custom-radio" type="radio" value="CanilClandestino" />Canil clandestino<br />
+                <input asp-for="TipoDenuncia" class="custom-radio" type="radio" value="AnimalRural" />Animal de produção na zona rural (cavalo, vaca, etc)<br />
+                <input asp-for="TipoDenuncia" class="custom-radio" type="radio" value="Outro"/>Outro (especifique no campo abaixo)<br />
+                <span asp-validation-for="TipoDenuncia" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label">Descrição</label>
+                <textarea asp-for="Descricao" class="form-control" maxlength=500></textarea>
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Foto</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="imagem" id="customFile" accept="image/png, image/jpeg">
+                    <label class="custom-file-label" for="customFile">Escolha a imagem</label>
+                </div>
+            </div>
+
 
             <div class="form-group">
                 <input type="submit" value="Cadastrar" class="d-flex justify-content-center btn btn-primary" />
@@ -73,41 +109,46 @@
 
     <script type="text/javascript">
 
+        $(document).ready(function () {
+            $('#telefone').mask("(99) 000000000");
+            $('#cpf').mask("00000000000");            
+        });
+
         $("#cidade").change(function () {
             if ($(this).val() != "" && $(this).val() != "Londrina") {
                 $("#regiao").val($('option:contains("---")').val());
-                $("#regiao").prop('disabled', true)
+                $("#regiao").prop('readonly', true)
                 $("#bairro").val('---');
-                $("#bairro").prop('disabled', true)                   
-                $("#semBairro").prop('disabled', true)                
+                $("#bairro").prop('readonly', true)
+                $("#semBairro").prop('disabled', true)
             }
             else {
                 $("#regiao").val($('option:contains("")').val());
-                $("#regiao").prop('disabled', false)
+                $("#regiao").prop('readonly', false)
                 $("#bairro").val('');
-                $("#bairro").prop('disabled', false)                
+                $("#bairro").prop('readonly', false)
                 $("#semBairro").prop('disabled', false)
                 $("#semBairro").prop('checked', false)
             }
         });
 
         $('#semBairro').on('click', function () {
-            var checkbox = $('#semBairro:checked').length;            
+            var checkbox = $('#semBairro:checked').length;
 
             if (checkbox === 1) {
                 $("#bairro").val('---');
-                $("#bairro").prop('disabled', true)
+                $("#bairro").prop('readonly', true)
             }
             else {
                 $("#bairro").val('');
-                $("#bairro").prop('disabled', false)
+                $("#bairro").prop('readonly', false)
             }
         });
 
         // Add the following code if you want the name of the file appear on select
-        $(".custom-file-input").on("change", function () {            
-            var fileName = $(this).val().split("\\").pop();            
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-        });        
+        });
     </script>
 }

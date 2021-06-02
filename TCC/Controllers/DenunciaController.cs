@@ -100,17 +100,13 @@ namespace TCC.Controllers
         {
             try
             {
+                
                 string nomeUnicoArquivo = UploadedFile(imagem);
-                Denuncia denuncia = new Denuncia
-                {
-                    Descricao = model.Descricao,
-                    Status = "Pendente",
-                    Foto = nomeUnicoArquivo,
-                    DenunciaEndereco = model.DenunciaEndereco,
-                    DataRealizada = DateTime.Today,
-                };
+                model.Status = "Pendente";
+                model.Foto = nomeUnicoArquivo;
+                model.DataRealizada = DateTime.Today;
 
-                _context.Denuncias.Add(denuncia);
+                _context.Denuncias.Add(model);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
             }

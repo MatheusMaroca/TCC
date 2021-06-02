@@ -6,7 +6,7 @@
 }
 
 <div class="col-md-12">
-    <form asp-action="Cadastrar">
+    <form asp-action="Cadastrar"  enctype="multipart/form-data">
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="Nome" class="control-label">Nome</label>
@@ -63,7 +63,7 @@
         </div>
         <div class="form-group">
             <label asp-for="ClinicaEndereco.Numero">Número</label>
-            <input asp-for="ClinicaEndereco.Numero" class="form-control"/>
+            <input asp-for="ClinicaEndereco.Numero" class="form-control" />
             <span asp-validation-for="ClinicaEndereco.Numero" class="text-danger"></span>
         </div>
         <div class="form-group">
@@ -87,15 +87,15 @@
         $("#cidade").change(function () {
             if ($(this).val() != "" && $(this).val() != "Londrina") {
                 $("#regiao").val($('option:contains("---")').val());
-                $("#regiao").prop('disabled', true)
+                $("#regiao").prop('readonly', true)
                 $("#bairro").val('---');
-                $("#bairro").prop('disabled', true)
+                $("#bairro").prop('readonly', true)
             }
             else {
                 $("#regiao").val($('option:contains("")').val());
-                $("#regiao").prop('disabled', false)
+                $("#regiao").prop('readonly', false)
                 $("#bairro").val('');
-                $("#bairro").prop('disabled', false)
+                $("#bairro").prop('readonly', false)
             }
         });
         // Add the following code if you want the name of the file appear on select
