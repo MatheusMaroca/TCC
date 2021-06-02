@@ -52,11 +52,10 @@ namespace TCC.Controllers
                 }
 
                 _context.Horarios.Add(hora);
+                _context.SaveChanges();
 
                 con++;
             }
-
-            _context.SaveChanges();
 
         }
         public Boolean verificaHorario(Agendamento model)
